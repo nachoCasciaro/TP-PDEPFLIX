@@ -57,8 +57,3 @@ darLikeAPelicula id = completaAca
 calcularPorcentajeDeCoincidencia : Preferences -> List Movie -> List Movie
 calcularPorcentajeDeCoincidencia preferencias = completaAca
 
-haciendo cambios
-
-wofewfewf
-
-rgregerg

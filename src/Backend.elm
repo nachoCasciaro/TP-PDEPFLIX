@@ -10,6 +10,9 @@ completaAca = identity
 filtrarPeliculasPorPalabrasClave : String -> List Movie -> List Movie
 filtrarPeliculasPorPalabrasClave palabras = List.filter (peliculaTienePalabrasClave palabras)
 
+peliculaTienePalabrasClave : String -> Movie -> Bool
+peliculaTienePalabrasClave palabras pelicula = String.contains palabras pelicula.title
+
 -- esta función la dejamos casi lista, pero tiene un pequeño bug. ¡Corregilo!
 --
 -- Además tiene dos problemas, que también deberías corregir:
@@ -17,7 +20,7 @@ filtrarPeliculasPorPalabrasClave palabras = List.filter (peliculaTienePalabrasCl
 -- * distingue mayúsculas de minúsculas, pero debería encontrar a "Lion King" aunque escriba "kINg"
 -- * busca una coincidencia exacta, pero si escribís "Avengers Ultron" debería encontrar a "Avengers: Age Of Ultron"
 --
-peliculaTienePalabrasClave palabras pelicula = String.contains "Toy" pelicula.title
+
 
 -- **************
 -- Requerimiento: visualizar las películas según el género elegido en un selector;

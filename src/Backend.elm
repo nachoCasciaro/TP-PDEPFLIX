@@ -1,9 +1,5 @@
 module Backend exposing(..)
 import Models exposing(Movie, Preferences)
-module Backend exposing(..)
-import Models exposing(Movie, Preferences)
-import List exposing (all,any,length,map, reverse)
-import String exposing (words)
 
 completaAca = identity
 
@@ -36,10 +32,7 @@ filtrarPeliculasPorGenero genero = completaAca
 -- **************
 
 filtrarPeliculasPorMenoresDeEdad : Bool -> List Movie -> List Movie
-filtrarPeliculasPorMenoresDeEdad mostrarSoloMenores peliculas = if mostrarSoloMenores then soloMenores peliculas else peliculas
-
-soloMenores : List Movie -> List Movie
-soloMenores = List.filter .forKids
+filtrarPeliculasPorMenoresDeEdad mostrarSoloMenores = completaAca
 
 -- **************
 -- Requerimiento: ordenar las películas por su rating;

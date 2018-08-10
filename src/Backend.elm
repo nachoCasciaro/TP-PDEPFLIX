@@ -11,13 +11,10 @@ filtrarPeliculasPorPalabrasClave : String -> List Movie -> List Movie
 filtrarPeliculasPorPalabrasClave palabras = List.filter (peliculaTienePalabrasClave palabras)
 
 peliculaTienePalabrasClave : String -> Movie -> Bool
-peliculaTienePalabrasClave palabras pelicula = String.contains palabras pelicula.title
+peliculaTienePalabrasClave palabras pelicula = List.all (flip contiene1palabra pelicula.title) (String.words palabras)
 
-peliculaTienePalabrasClave : String -> Movie -> Bool
-peliculaTienePalabrasClave palabrasBuscadas pelicula = List.all contieneAlmenosUna (String.words palabrasBuscadas) pelicula.title
-
-contieneAlmenosUna : String -> String -> Bool
-contieneAlmenosUna palabraBuscada1 pelicula = String.contains (String.toUpper palabraBuscada1) (String.toUpper pelicula)
+contiene1palabra : String -> String -> Bool
+contiene1palabra palabra1 palabra2 =  String.contains (String.toUpper palabra1) (String.toUpper palabra2) && palabra1 /= "" && palabra2 /= ""
 
 
 -- esta función la dejamos casi lista, pero tiene un pequeño bug. ¡Corregilo!

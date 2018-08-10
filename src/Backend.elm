@@ -26,8 +26,13 @@ peliculaTienePalabrasClave palabras pelicula = String.contains palabras pelicula
 -- Requerimiento: visualizar las películas según el género elegido en un selector;
 -- **************
 
+
 filtrarPeliculasPorGenero : String -> List Movie -> List Movie
-filtrarPeliculasPorGenero genero = completaAca
+filtrarPeliculasPorGenero genero = List.filter (mismoGenero genero)
+
+mismoGenero : String -> Movie -> Bool
+mismoGenero genero pelicula = List.member genero pelicula.genre
+
 
 -- **************
 -- Requerimiento: filtrar las películas que sean aptas para menores de edad,

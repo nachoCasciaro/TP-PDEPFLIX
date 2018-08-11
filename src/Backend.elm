@@ -11,7 +11,7 @@ completaAca = identity
 -- **************
 
 filtrarPeliculasPorPalabrasClave : String -> List Movie -> List Movie
-filtrarPeliculasPorPalabrasClave palabras = List.filter (peliculaTienePalabrasClave palabras)
+filtrarPeliculasPorPalabrasClave palabras pelicula = List.filter (peliculaTienePalabrasClave palabras)
 
 peliculaTienePalabrasClave : String -> Movie -> Bool
 peliculaTienePalabrasClave palabras pelicula = List.all (flip contiene1palabra pelicula.title) (String.words palabras)
@@ -35,10 +35,10 @@ contiene1palabra palabra1 palabra2 =  String.contains (String.toUpper palabra1) 
 
 
 filtrarPeliculasPorGenero : String -> List Movie -> List Movie
-filtrarPeliculasPorGenero genero = List.filter (peliculaTieneGenero genero)
+filtrarPeliculasPorGenero genero = List.filter (mismoGenero genero)
 
---mismoGenero : String -> Movie -> Bool
---mismoGenero genero pelicula = List.member genero pelicula.genre
+mismoGenero : String -> Movie -> Bool
+mismoGenero genero pelicula = List.member genero pelicula.genre
 
 
 -- **************

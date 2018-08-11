@@ -32,10 +32,10 @@ contiene1palabra palabra1 palabra2 =  String.contains (String.toUpper palabra1) 
 
 
 filtrarPeliculasPorGenero : String -> List Movie -> List Movie
-filtrarPeliculasPorGenero genero = List.filter (mismoGenero genero)
+filtrarPeliculasPorGenero genero = []
 
-mismoGenero : String -> Movie -> Bool
-mismoGenero genero pelicula = List.member genero pelicula.genre
+--mismoGenero : String -> Movie -> Bool
+--mismoGenero genero pelicula = List.member genero pelicula.genre
 
 
 -- **************
@@ -44,7 +44,10 @@ mismoGenero genero pelicula = List.member genero pelicula.genre
 -- **************
 
 filtrarPeliculasPorMenoresDeEdad : Bool -> List Movie -> List Movie
-filtrarPeliculasPorMenoresDeEdad mostrarSoloMenores = completaAca
+filtrarPeliculasPorMenoresDeEdad mostrarSoloMenores = List.filter (peliculasAptaPara mostrarSoloMenores)
+
+peliculasAptaPara : Bool -> Movie -> Bool
+peliculasAptaPara mostrarSoloMenores pelicula = mostrarSoloMenores && pelicula.forKids
 
 -- **************
 -- Requerimiento: ordenar las películas por su rating;

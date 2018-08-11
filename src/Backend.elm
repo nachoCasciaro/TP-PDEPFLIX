@@ -35,7 +35,7 @@ filtrarPeliculasPorGenero : String -> List Movie -> List Movie
 filtrarPeliculasPorGenero genero = List.filter (mismoGenero genero)
 
 mismoGenero : String -> Movie -> Bool
-mismoGenero genero pelicula = List.member genero pelicula.genre
+mismoGenero genero pelicula = false
 
 
 -- **************

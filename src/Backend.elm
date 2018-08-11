@@ -54,7 +54,7 @@ peliculasAptaPara mostrarSoloMenores pelicula = mostrarSoloMenores && pelicula.f
 -- **************
 
 ordenarPeliculasPorRating : List Movie -> List Movie
-ordenarPeliculasPorRating = completaAca
+ordenarPeliculasPorRating =  List.reverse << List.sortBy .rating
 
 -- **************
 -- Requerimiento: dar like a una película

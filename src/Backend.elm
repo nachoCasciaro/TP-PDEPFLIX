@@ -81,7 +81,7 @@ calcularPorcentajeDeCoincidencia preferencias = List.map (cambiarPorcentaje pref
 
 
 cambiarPorcentaje : Preferences -> Movie -> Movie
-cambiarPorcentaje preferencias  = noSuperar100Porciento<<(porcentajeGenero preferencias.genre)<<(porcentajeActor preferencias.favoriteActor)<<(porcentajePalabrasClave preferencias.keywords)
+cambiarPorcentaje preferencias  = noSuperar100Porciento << (porcentajeGenero preferencias.genre) << (porcentajeActor preferencias.favoriteActor) << (porcentajePalabrasClave preferencias.keywords)
 
 noSuperar100Porciento : Movie -> Movie
 noSuperar100Porciento pelicula = if pelicula.matchPercentage > 100 then
@@ -110,7 +110,7 @@ peliculaTieneActor : String -> Movie -> Bool
 peliculaTieneActor actor pelicula = List.member actor pelicula.actors
 
 porcentajePalabrasClave : String -> Movie -> Movie
-porcentajePalabrasClave palabras pelicula = aumentarPorcentaje pelicula (List.sum (List.map (obtenerPorcentajePalabraClave (toLower pelicula.title)) (List.map toLower (words palabras))))
+porcentajePalabrasClave palabras pelicula = aumentarPorcentaje pelicula (List.sum (List.map (obtenerPorcentajePalabraClave (toLower pelicula.title)) (List.map toLower (String.words palabras))))
 
 obtenerPorcentajePalabraClave : String -> String -> Int
 obtenerPorcentajePalabraClave pelicula palabraClave = 

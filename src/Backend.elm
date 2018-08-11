@@ -11,13 +11,10 @@ completaAca = identity
 -- **************
 
 filtrarPeliculasPorPalabrasClave : String -> List Movie -> List Movie
-filtrarPeliculasPorPalabrasClave palabras pelicula = List.filter (peliculaTienePalabrasClave palabras)
+filtrarPeliculasPorPalabrasClave palabras = List.filter (peliculaTienePalabrasClave palabras)
 
 peliculaTienePalabrasClave : String -> Movie -> Bool
-peliculaTienePalabrasClave palabras pelicula = List.all (flip contiene1palabra pelicula.title) (String.words palabras)
-
-contiene1palabra : String -> String -> Bool
-contiene1palabra palabra1 palabra2 =  String.contains (String.toUpper palabra1) (String.toUpper palabra2) && palabra1 /= "" && palabra2 /= ""
+peliculaTienePalabrasClave palabras pelicula = List.any ( flip String.contains (toLower pelicula.title) <<toLower) (words palabras)
 
 
 -- esta función la dejamos casi lista, pero tiene un pequeño bug. ¡Corregilo!
@@ -64,7 +61,14 @@ ordenarPeliculasPorRating = completaAca
 -- **************
 
 darLikeAPelicula : Int -> List Movie -> List Movie
-darLikeAPelicula id = completaAca
+darLikeAPelicula id = List.map (peliculaConLike id)
+
+peliculaConLike : Int -> Movie -> Movie
+peliculaConLike id pelicula = if (id == pelicula.id) then 
+                                  {pelicula | likes = pelicula.likes + 1} 
+                              else 
+                                  pelicula
+
 
 -- **************
 -- Requerimiento: cargar preferencias a través de un popup modal,

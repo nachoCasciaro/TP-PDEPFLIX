@@ -47,7 +47,7 @@ filtrarPeliculasPorMenoresDeEdad : Bool -> List Movie -> List Movie
 filtrarPeliculasPorMenoresDeEdad soloParaMenores = List.filter (peliculasAptaPara soloParaMenores)
 
 peliculasAptaPara : Bool -> Movie -> Bool
-peliculasAptaPara soloParaMenores pelicula = mostrarSoloMenores && pelicula.forKids
+peliculasAptaPara soloParaMenores pelicula = soloParaMenores && pelicula.forKids
 
 -- **************
 -- Requerimiento: ordenar las películas por su rating;
@@ -77,5 +77,44 @@ peliculaConLike id pelicula = if (id == pelicula.id) then
 -- **************
 
 calcularPorcentajeDeCoincidencia : Preferences -> List Movie -> List Movie
-calcularPorcentajeDeCoincidencia preferencias = completaAca
+calcularPorcentajeDeCoincidencia preferencias = List.map (cambiarPorcentaje preferencias)
 
+
+cambiarPorcentaje : Preferences -> Movie -> Movie
+cambiarPorcentaje preferencias  = noSuperar100Porciento<<(porcentajeGenero preferencias.genre)<<(porcentajeActor preferencias.favoriteActor)<<(porcentajePalabrasClave preferencias.keywords)
+
+noSuperar100Porciento : Movie -> Movie
+noSuperar100Porciento pelicula = if pelicula.matchPercentage > 100 then
+                                     {pelicula | matchPercentage = 100}
+                                 else
+                                     pelicula
+
+aumentarPorcentaje : Movie -> Int -> Movie
+aumentarPorcentaje pelicula aumento = {pelicula | matchPercentage = pelicula.matchPercentage + aumento}
+
+porcentajeGenero : String -> Movie -> Movie
+porcentajeGenero genero pelicula =
+    if mismoGenero genero pelicula then
+        aumentarPorcentaje pelicula 60
+    else
+        pelicula
+
+porcentajeActor : String -> Movie -> Movie
+porcentajeActor actor pelicula =
+    if peliculaTieneActor actor pelicula then
+        aumentarPorcentaje pelicula 50
+    else
+        pelicula
+
+peliculaTieneActor : String -> Movie -> Bool
+peliculaTieneActor actor pelicula = List.member actor pelicula.actors
+
+porcentajePalabrasClave : String -> Movie -> Movie
+porcentajePalabrasClave palabras pelicula = aumentarPorcentaje pelicula (List.sum (List.map (obtenerPorcentajePalabraClave (toLower pelicula.title)) (List.map toLower (words palabras))))
+
+obtenerPorcentajePalabraClave : String -> String -> Int
+obtenerPorcentajePalabraClave pelicula palabraClave = 
+    if any ((==) palabraClave) (words pelicula) then
+        20
+    else
+        0

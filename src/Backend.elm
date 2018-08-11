@@ -35,7 +35,7 @@ contiene1palabra palabra1 palabra2 =  String.contains (String.toUpper palabra1) 
 
 
 filtrarPeliculasPorGenero : String -> List Movie -> List Movie
-filtrarPeliculasPorGenero genero = []
+filtrarPeliculasPorGenero genero = List.filter (peliculaTieneGenero genero)
 
 --mismoGenero : String -> Movie -> Bool
 --mismoGenero genero pelicula = List.member genero pelicula.genre

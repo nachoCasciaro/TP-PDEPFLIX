@@ -44,10 +44,10 @@ mismoGenero genero pelicula = List.member genero pelicula.genre
 -- **************
 
 filtrarPeliculasPorMenoresDeEdad : Bool -> List Movie -> List Movie
-filtrarPeliculasPorMenoresDeEdad mostrarSoloMenores = List.filter (peliculasAptaPara mostrarSoloMenores)
+filtrarPeliculasPorMenoresDeEdad soloParaMenores = List.filter (peliculasAptaPara soloParaMenores)
 
 peliculasAptaPara : Bool -> Movie -> Bool
-peliculasAptaPara mostrarSoloMenores pelicula = mostrarSoloMenores && pelicula.forKids
+peliculasAptaPara soloParaMenores pelicula = mostrarSoloMenores && pelicula.forKids
 
 -- **************
 -- Requerimiento: ordenar las películas por su rating;

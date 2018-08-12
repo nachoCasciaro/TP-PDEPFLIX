@@ -1,7 +1,7 @@
 module Backend exposing(..)
 import Models exposing(Movie, Preferences)
-import List exposing (range, map, intersperse, filter, any)
-import String exposing (concat, contains, toLower, words)
+import List exposing (map, filter, any)
+import String exposing (contains, toLower, words)
 
 
 completaAca = identity

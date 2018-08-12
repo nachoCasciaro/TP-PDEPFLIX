@@ -43,8 +43,8 @@ mismoGenero genero pelicula = List.member (toLower genero) (map toLower pelicula
 --                usando un checkbox;
 -- **************
 
-filtrarPeliculasPorMenoresDeEdad : Bool -> List Movie -> List Movie
-filtrarPeliculasPorMenoresDeEdad soloParaMenores = List.filter (peliculasAptaPara soloParaMenores)
+filtrarPeliculasParaMenoresDeEdad : Bool -> List Movie -> List Movie
+filtrarPeliculasParaMenoresDeEdad soloParaMenores = List.filter (peliculasAptaPara soloParaMenores)
 
 peliculasAptaPara : Bool -> Movie -> Bool
 peliculasAptaPara soloParaMenores pelicula = soloParaMenores && pelicula.forKids

@@ -81,7 +81,7 @@ calcularPorcentajeDeCoincidencia preferencias = List.map (cambiarPorcentaje pref
 
 
 cambiarPorcentaje : Preferences -> Movie -> Movie
-cambiarPorcentaje preferencias  = noSuperar100Porciento << (porcentajeGeneroPredilecto preferencias.genre) << (porcentajeActor preferencias.favoriteActor) << (porcentajePalabrasClave preferencias.keywords)
+cambiarPorcentaje preferencias  = noSuperar100Porciento << (porcentajeGenerosSimilares preferencias.genre) << (porcentajeGeneroPredilecto preferencias.genre) << (porcentajeActor preferencias.favoriteActor) << (porcentajePalabrasClave preferencias.keywords)
 
 noSuperar100Porciento : Movie -> Movie
 noSuperar100Porciento pelicula = if pelicula.matchPercentage > 100 then
@@ -119,5 +119,9 @@ obtenerPorcentajePalabraClave pelicula palabraClave =
     else
         0
 
---porcentajeGenerosSimilares : Preferences -> Movie -> Movie
---porcentajeGenerosSimilares preferencias pelicula = 
+porcentajeGenerosSimilares : String -> Movie -> Movie
+porcentajeGenerosSimilares  genero pelicula = 
+    if (genero == "Horror" && mismoGenero "Suspense" pelicula) then
+        aumentarPorcentaje pelicula 15
+    else
+        pelicula 

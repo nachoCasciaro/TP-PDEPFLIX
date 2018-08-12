@@ -35,7 +35,7 @@ filtrarPeliculasPorGenero : String -> List Movie -> List Movie
 filtrarPeliculasPorGenero genero = List.filter (mismoGenero genero)
 
 mismoGenero : String -> Movie -> Bool
-mismoGenero genero pelicula = List.member genero pelicula.genre
+mismoGenero genero pelicula = List.member (toLower genero) (map toLower pelicula.genre)
 
 
 -- **************
@@ -81,7 +81,7 @@ calcularPorcentajeDeCoincidencia preferencias = List.map (cambiarPorcentaje pref
 
 
 cambiarPorcentaje : Preferences -> Movie -> Movie
-cambiarPorcentaje preferencias  = noSuperar100Porciento << (porcentajeGenero preferencias.genre) << (porcentajeActor preferencias.favoriteActor) << (porcentajePalabrasClave preferencias.keywords)
+cambiarPorcentaje preferencias  = noSuperar100Porciento << (porcentajeGeneroPredilecto preferencias.genre) << (porcentajeActor preferencias.favoriteActor) << (porcentajePalabrasClave preferencias.keywords)
 
 noSuperar100Porciento : Movie -> Movie
 noSuperar100Porciento pelicula = if pelicula.matchPercentage > 100 then
@@ -92,8 +92,8 @@ noSuperar100Porciento pelicula = if pelicula.matchPercentage > 100 then
 aumentarPorcentaje : Movie -> Int -> Movie
 aumentarPorcentaje pelicula aumento = {pelicula | matchPercentage = pelicula.matchPercentage + aumento}
 
-porcentajeGenero : String -> Movie -> Movie
-porcentajeGenero genero pelicula =
+porcentajeGeneroPredilecto : String -> Movie -> Movie
+porcentajeGeneroPredilecto genero pelicula =
     if mismoGenero genero pelicula then
         aumentarPorcentaje pelicula 60
     else
@@ -104,7 +104,7 @@ porcentajeActor actor pelicula =
     if peliculaTieneActor actor pelicula then
         aumentarPorcentaje pelicula 50
     else
-        pelicula
+        pelicula 
 
 peliculaTieneActor : String -> Movie -> Bool
 peliculaTieneActor actor pelicula = List.member actor pelicula.actors
@@ -118,3 +118,6 @@ obtenerPorcentajePalabraClave pelicula palabraClave =
         20
     else
         0
+
+--porcentajeGenerosSimilares : Preferences -> Movie -> Movie
+--porcentajeGenerosSimilares preferencias pelicula = 

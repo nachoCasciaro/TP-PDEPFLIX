@@ -112,6 +112,9 @@ peliculaTieneActor actor pelicula = List.member (toLower actor) (map toLower pel
 porcentajePalabrasClave : String -> Movie -> Movie
 porcentajePalabrasClave palabras pelicula = aumentarPorcentaje pelicula (List.sum (List.map (obtenerPorcentajePalabraClave (toLower pelicula.title)) (List.map toLower (String.words palabras))))
 
+calcularAumento : String -> Movie -> Movie
+calcularAumento palabras pelicula = 
+
 obtenerPorcentajePalabraClave : String -> String -> Int
 obtenerPorcentajePalabraClave pelicula palabraClave = 
     if any ((==) palabraClave) (words pelicula) then

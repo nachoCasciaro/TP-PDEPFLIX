@@ -14,9 +14,10 @@ filtrarPeliculasPorPalabrasClave : String -> List Movie -> List Movie
 filtrarPeliculasPorPalabrasClave palabras = List.filter (peliculaTienePalabrasClave palabras)
 
 peliculaTienePalabrasClave : String -> Movie -> Bool
-peliculaTienePalabrasClave palabras pelicula = List.any ( flip String.contains (toLower pelicula.title) <<toLower) (words palabras)
+peliculaTienePalabrasClave palabras pelicula = List.any (tienePalabrasClave pelicula) palabras
 
-
+tienePalabrasClave : Movie -> String -> Bool
+tienePalabrasClave pelicula palabras = (flip String.contains (toLower pelicula.title) <<toLower) (words palabras)
 -- esta función la dejamos casi lista, pero tiene un pequeño bug. ¡Corregilo!
 --
 -- Además tiene dos problemas, que también deberías corregir:
